@@ -1,6 +1,6 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, Box, Torus, Float } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -16,16 +16,15 @@ const RotatingBox = ({ position }: { position: [number, number, number] }) => {
   });
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Box ref={meshRef} position={position} args={[1, 1, 1]}>
-        <meshStandardMaterial 
-          color="#00ffff" 
-          emissive="#003333"
-          roughness={0.1}
-          metalness={0.8}
-        />
-      </Box>
-    </Float>
+    <mesh ref={meshRef} position={position}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial 
+        color="#00ffff" 
+        emissive="#003333"
+        roughness={0.1}
+        metalness={0.8}
+      />
+    </mesh>
   );
 };
 
@@ -40,14 +39,15 @@ const FloatingSphere = ({ position }: { position: [number, number, number] }) =>
   });
 
   return (
-    <Sphere ref={meshRef} position={position} args={[0.8, 32, 32]}>
+    <mesh ref={meshRef} position={position}>
+      <sphereGeometry args={[0.8, 32, 32]} />
       <meshStandardMaterial 
         color="#ff00ff" 
         emissive="#330033"
         roughness={0.1}
         metalness={0.8}
       />
-    </Sphere>
+    </mesh>
   );
 };
 
@@ -62,16 +62,15 @@ const FloatingTorus = ({ position }: { position: [number, number, number] }) => 
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={2} floatIntensity={1}>
-      <Torus ref={meshRef} position={position} args={[1, 0.3, 16, 100]}>
-        <meshStandardMaterial 
-          color="#ffff00" 
-          emissive="#333300"
-          roughness={0.1}
-          metalness={0.8}
-        />
-      </Torus>
-    </Float>
+    <mesh ref={meshRef} position={position}>
+      <torusGeometry args={[1, 0.3, 16, 100]} />
+      <meshStandardMaterial 
+        color="#ffff00" 
+        emissive="#333300"
+        roughness={0.1}
+        metalness={0.8}
+      />
+    </mesh>
   );
 };
 
@@ -80,7 +79,7 @@ const Scene3D = () => {
     <div className="absolute inset-0 -z-10">
       <Canvas 
         camera={{ position: [0, 0, 10], fov: 75 }}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} color="#00ffff" />

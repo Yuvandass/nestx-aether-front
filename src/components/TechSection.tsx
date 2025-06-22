@@ -1,6 +1,5 @@
 
 import { Canvas } from '@react-three/fiber';
-import { Float, Box } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -16,17 +15,16 @@ const TechCube = ({ position, color }: { position: [number, number, number], col
   });
 
   return (
-    <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>
-      <Box ref={meshRef} position={position} args={[0.8, 0.8, 0.8]}>
-        <meshStandardMaterial 
-          color={color} 
-          emissive={color}
-          emissiveIntensity={0.2}
-          roughness={0.1}
-          metalness={0.9}
-        />
-      </Box>
-    </Float>
+    <mesh ref={meshRef} position={position}>
+      <boxGeometry args={[0.8, 0.8, 0.8]} />
+      <meshStandardMaterial 
+        color={color} 
+        emissive={color}
+        emissiveIntensity={0.2}
+        roughness={0.1}
+        metalness={0.9}
+      />
+    </mesh>
   );
 };
 
@@ -66,7 +64,7 @@ const TechSection = () => {
           <div className="relative h-96 animate-slide-in-right">
             <Canvas 
               camera={{ position: [0, 0, 8], fov: 50 }}
-              gl={{ antialias: true, alpha: true }}
+              dpr={[1, 2]}
             >
               <ambientLight intensity={0.4} />
               <pointLight position={[10, 10, 10]} intensity={1} color="#00ffff" />
