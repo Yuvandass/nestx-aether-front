@@ -64,7 +64,10 @@ const TechSection = () => {
           </div>
           
           <div className="relative h-96 animate-slide-in-right">
-            <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+            <Canvas 
+              camera={{ position: [0, 0, 8], fov: 50 }}
+              gl={{ antialias: true, alpha: true }}
+            >
               <ambientLight intensity={0.4} />
               <pointLight position={[10, 10, 10]} intensity={1} color="#00ffff" />
               <pointLight position={[-10, -10, 5]} intensity={0.5} color="#ff00ff" />
