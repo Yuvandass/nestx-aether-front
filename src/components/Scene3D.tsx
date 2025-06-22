@@ -1,13 +1,14 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, Box, Torus, Float, Text3D, Center } from '@react-three/drei';
+import { OrbitControls, Sphere, Box, Torus, Float } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
 const RotatingBox = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += 0.01;
       meshRef.current.rotation.y += 0.01;
@@ -53,7 +54,7 @@ const FloatingSphere = ({ position }: { position: [number, number, number] }) =>
 const FloatingTorus = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += 0.008;
       meshRef.current.rotation.z += 0.008;
